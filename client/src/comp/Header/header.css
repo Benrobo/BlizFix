@@ -1,0 +1,59 @@
+.header{
+    width: 100%;
+    height: auto;
+    position: relative;
+    left:0px;
+    top:0px;
+    background-image: url("../../assets/img/bg/bg2.jpg");
+    background-size:cover;
+    background-repeat:no-repeat;
+    background-position: center;
+}
+.header .ovl{
+    padding:10px;
+    width:100%;
+    height:100%;
+    background:var(--bg-tp);
+}
+.header .ovl .main{
+    width:60%;
+    height:40vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding:20px;
+    color: var(--bg-l);
+    text-align: center;
+    position: relative;
+    margin:10px auto;
+}
+.header .ovl .main h1{
+    font-weight: 900;
+    font-size:50px;
+}
+.header .ovl .main .form{
+    display: flex;
+    background: var(--bg-d);
+    width:100%;
+    position:absolute;
+    bottom:-50px;
+    padding: 12px;
+    border-radius: 5px;
+}
+.header .ovl .main .form .search-inp{
+    width:100%;
+    border-radius: 0px;
+    background: var(--bg-n);
+    border: none;
+    outline:none;
+    padding:8px;
+}
+.header .ovl .main .form .search-term{
+    width:15%;
+    border-radius: 0px;
+    background: var(--bg-n);
+    border: none;
+    outline:none;
+    height:50px;
+}
