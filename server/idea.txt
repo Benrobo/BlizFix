@@ -1,0 +1,7 @@
+IdeasCount
+
+This is a project that enables user in putting down whatever ideas that comes to mind in whatever categories it might be. Users would state the problem name and the description of the problem and also gives the idea in solving the problem.
+
+Other users can then vote on most interesting ideas.
+
+
