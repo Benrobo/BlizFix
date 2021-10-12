@@ -7,6 +7,7 @@ CREATE TABLE users(
     email TEXT NOT NULL,
     pwd_hash TEXT NOT NULL,
     user_img TEXT NOT NULL,
+    profession TEXT NOT NULL,
     refresh_token TEXT,
     user_role INT NOT NULL,
     created_at TIMESTAMP NOT NULL DEFAULT NOW()

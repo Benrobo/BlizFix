@@ -1,0 +1,152 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+
+:root{
+   --bg-d: #041325; 
+   --bg-n: #020911;
+   --bg-l:#5eb4ff;
+   --bg-1: #061b2e;
+   --bg-tp: rgba(0,0,0,.8);
+   --bg-tp-grn:rgb(4, 102, 51);
+   --bg-l-grn:rgb(13, 212, 109);
+   --bg-l-rd:rgb(212, 13, 39);
+}
+
+*{
+    box-sizing: border-box;
+}
+
+hr{
+    background:#3f3f3f;
+}
+
+.section {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  top: 0px;
+  left: 0px;
+  padding: 0px;
+  margin: 0px;
+}
+.section .main {
+  width: 70%;
+  height: auto;
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-areas: "post";
+  grid-gap: 20px;
+  margin: 0px auto;
+  flex-wrap: wrap;
+  padding: 20px;
+  position: relative;
+}
+.section .main .post-container {
+  width: 100%;
+  position: relative;
+  grid-area: post;
+}
+
+.section .main .post-container .post .post-img img {
+  width: 100%;
+  border-radius: 20px;
+}
+.section .main .post-container .post .post-details .top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #777;
+}
+.section .main .post-container .post .post-details .top .left img {
+  width: 50px;
+}
+.section .main .post-container .post .post-details .top .right {
+  display: flex;
+}
+.section .main .post-container .post .post-details .top .right .btns {
+  background: var(--bg-n);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 2px solid transparent;
+  padding: 10px 12px;
+  color: var(--bg-l);
+  width: 100px;
+  transform: scale(1);
+  border: none;
+  outline: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+.section .main .post-container .post .post-details .top .right .btns ion-icon {
+  font-size: 20px;
+  padding: 12px;
+  transform: scale(0.85);
+}
+.section
+  .main
+  .post-container
+  .post
+  .post-details
+  .top
+  .right
+  .btns
+  ion-icon:hover {
+  background: var(--bg-d);
+  border-radius: 50%;
+  transform: scale(1);
+  /* font-size:20px; */
+}
+.section .main .post-container .post .post-details .top .right .btns:focus {
+  border: 2px solid var(--bg-l);
+  transition: 0.2s;
+  transform: scale(1.1);
+}
+.section .main .post-container .post .post-details .top .right .btns .count {
+  color: #ccc;
+  font-size: 15px;
+}
+
+.section .main .post-container .post .post-details .bottom {
+  color: #ccc;
+}
+
+/* Action container */
+.post-action {
+  position: fixed;
+  right: 20px;
+  top: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: column;
+}
+.post-action ion-icon {
+  font-size: 25px;
+  padding: 12px;
+  margin: 10px;
+  border-radius: 50%;
+  transform: scale(0.85);
+  cursor: pointer;
+}
+.post-action .edit {
+  color: var(--bg-l-grn);
+}
+.post-action .delete {
+  color: var(--bg-l-rd);
+}
+.post-action .edit:hover {
+  background: #062e1f;
+  transform: scale(0.95);
+}
+.post-action .delete:hover {
+  background: #2e0612;
+  transform: scale(0.95);
+}
+
+
+
+@media (max-width: 768px) {
+  .section .main {
+    width: 100%;
+  }
+}

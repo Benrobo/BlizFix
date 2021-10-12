@@ -11,9 +11,9 @@ router.post("/register", (req, res) => {
     const userid = uuid();
     const role = 1;
     let user_img = "dumy-random-img.png"
-    const { name, email, password } = req.body;
+    const { username, email, password, profession } = req.body;
 
-    if (name === "" || email === "" || password === "") {
+    if (username === "" || email === "" || password === "" || profession === "") {
         return res.json(Error(400, "All fields are required")).status(400)
     }
 
@@ -30,14 +30,14 @@ router.post("/register", (req, res) => {
         else {
             try {
                 let newPwd = await createHash(password, 10)
-                let sql = `INSERT INTO users(id,username, email, pwd_hash,user_role,user_img) VALUES($1, $2, $3,$4, $5,$6)`;
-                conn.query(sql, [userid, name, email, newPwd, role,user_img], (err, data) => {
+                let sql = `INSERT INTO users(id,username,email,pwd_hash,user_role,user_img,profession) VALUES($1,$2,$3,$4,$5,$6,$7)`;
+                conn.query(sql, [userid, username, email, newPwd, role, user_img, profession], (err, data) => {
                     if (err) {
                         console.log(err)
                         return res.json(Error(500, "Somemthing went wrong")).status(500)
                     }
 
-                    res.json({ msg: "User registered successfully" })
+                    res.json({ msg: "User registered successfully", status: 200, error: false })
                 })
             } catch (err) {
                 return res.json(Error(400, err.message)).status(400)

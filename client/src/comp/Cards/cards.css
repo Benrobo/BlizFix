@@ -20,6 +20,7 @@
 }
 .section .ideas-cont .ideas-box:hover{
     border: 2px solid var(--bg-l);
+    transition: .2s;
 }
 
 .section .ideas-cont .ideas-box .idea-head{

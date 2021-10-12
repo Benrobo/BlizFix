@@ -48,12 +48,5 @@
     border: none;
     outline:none;
     padding:8px;
-}
-.header .ovl .main .form .search-term{
-    width:15%;
-    border-radius: 0px;
-    background: var(--bg-n);
-    border: none;
-    outline:none;
-    height:50px;
+    color:#ccc;
 }

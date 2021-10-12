@@ -5,24 +5,10 @@ import "./section.css"
 
 export const Section = () => {
     return (
-        <section class="section">
-            <div class="main">
-                <div class="ideas-cont">
-                    <Cards />
-                    <Cards />
-                    <Cards />
-                    <Cards />
-                    <Cards />
-                    <Cards />
-                    <Cards />
-                    <Cards />
-                    <Cards />
-                    <Cards />
-                    <Cards />
-                    <Cards />
-                    <Cards />
-                    <Cards />
-                    <Cards />
+        <section className="section">
+            <div className="main">
+                <div className="ideas-cont mt-3">
+                        <Cards />
                 </div>
             </div>
         </section>
