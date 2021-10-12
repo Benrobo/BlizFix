@@ -4,7 +4,7 @@ const bcrypt = require("bcryptjs")
 const { v4: uuid } = require("uuid")
 const Error = require("../utils/error")
 const compareHash = require("../utils/compareHash")
-const { createAccessToken, createRefreshToken, sendRefreshToken, sendAccessToken } = require("../auth/tokens")
+const { createAccessToken, createRefreshToken, setRefreshToken, sendTokens } = require("../auth/tokens")
 
 const conn = require("../models/Model")
 
@@ -48,11 +48,11 @@ router.post("/login", (req, res) => {
 
                         let chk = await conn.query(sql, [refreshToken, email]);
 
-                        sendRefreshToken(res, refreshToken)
-                        // res.cookie("refreshtoken", refreshToken)
+                        if (chk.rowCount > 0) {
+                            sendTokens(res, accessToken, refreshToken);
+                            setRefreshToken(res, refreshToken)
+                        }
 
-                        sendAccessToken(res, accessToken)
-                        console.log(accessToken)
                         return;
                         conn.query(sql, [refreshToken, email], (err, result) => {
                             if (err) {

@@ -1,5 +1,6 @@
 require("dotenv").config()
 const express = require("express")
+const fileUpload = require('express-fileupload');
 const cors = require("cors")
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
@@ -13,6 +14,7 @@ const app = express()
 
 // middlewares
 // app.use(passport.initialize());
+app.use(fileUpload());
 app.use(cookieParser());
 app.use(cors())
 app.use(bodyParser.json());
@@ -27,6 +29,7 @@ app.use("/api/post/", require("./routes/addPost"))
 app.use("/api/post/", require("./routes/getPosts"))
 app.use("/api/post/", require("./routes/editPost"))
 app.use("/api/post/", require("./routes/deletePost"))
+app.use("/api/file/", require("./routes/fileUpload"))
 
 
 const port = 5000;

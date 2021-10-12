@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import "./login.css"
+import redirect from '../../utils/redirect'
+
 
 export const Login = () => {
     const [error, setError] = useState("")
@@ -29,7 +31,15 @@ export const Login = () => {
             });
 
             let result = await res.json();
-            console.log(result)
+
+            if (result.status === 200 || result) {
+                let tokens = {
+                    accessToken: result.accessToken,
+                    refreshToken: result.refreshToken
+                }
+                localStorage.setItem("tokens", JSON.stringify(tokens))
+                redirect("/profile")
+            }
             return;
             // if (result && result.status === 200 && result.msg) {
             //     setSuccess(result.msg);

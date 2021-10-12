@@ -1,19 +1,17 @@
-import React, { useState, useRef } from 'react'
+import React, { useState } from 'react'
 import "./signup.css"
+import redirect from "../../utils/redirect"
 
 export const Signup = () => {
-    const fileInput = useRef()
     const [error, setError] = useState("")
     const [success, setSuccess] = useState("")
-    const [image, setImage] = useState("")
-    const [username, setUsername] = useState("")
-    const [email, setEmail] = useState("")
-    const [profession, setProfession] = useState("")
-    const [password, setPassword] = useState("")
+    const [username, setUsername] = useState("John Doe")
+    const [email, setEmail] = useState("john@mail.com")
+    const [profession, setProfession] = useState("Software Engineer")
+    const [password, setPassword] = useState("1234")
 
     async function handleSignup(e) {
         e.preventDefault()
-
         if (username === "" || email === "" || profession === "" || password === "") {
             setError("All fields are requires")
             return;
@@ -25,6 +23,8 @@ export const Signup = () => {
                 profession,
                 password
             }
+
+            // console.log(newData)
             let apiUrl = "http://localhost:5000/auth/register"
             let res = await fetch(apiUrl, {
                 method: "POST",
@@ -39,9 +39,7 @@ export const Signup = () => {
             if (result && result.status === 200 && result.msg) {
                 setSuccess(result.msg);
                 setError("");
-                setTimeout(() => {
-                    window.location = "/login"
-                }, 2000);
+                redirect("/login")
                 return;
             } else {
                 setError(result.msg);
@@ -51,41 +49,29 @@ export const Signup = () => {
         }
     }
 
-    function handleRedirect(path) {
-        window.location = "/"
-    }
-
     return (
         <div>
             <div className="post-form-cont">
                 <form className="form-group">
                     <div className="head">
                         <h3>Signup</h3>
-                        <ion-icon name="close" className="close-form" onClick={handleRedirect}></ion-icon>
+                        <ion-icon name="close" className="close-form" onClick={(e) => redirect("/")}></ion-icon>
                         <br />
                         {error && <span className="failure">{error}</span>}
                         {success && <span className="success">{success}</span>}
                     </div>
                     <div className="body">
-                        <div className="file-cont">
-                            <input type="file" onChange={"dfv"} ref={fileInput} style={{ display: "none", }} />
+                        <input type="text" placeholder="Username" onChange={(e) => setUsername(e.target.value)} value={username} className="inp" />
 
-                            <button className="fileUpload" onClick={"dfvf"}>
-                                Upload Image
-                            </button>
-                            <span className="filetext"></span>
-                        </div>
-                        <input type="text" placeholder="Username" onChange={(e) => setUsername(e.target.value)} className="inp" />
-
-                        <input type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} className="inp" />
+                        <input type="text" placeholder="Email" onChange={(e) => setEmail(e.target.value)} value={email} className="inp" />
 
                         <input type="text"
                             onChange={(e) => setProfession(e.target.value)}
-                            placeholder="Profession" className="inp" />
+                            placeholder="Profession" value={profession} className="inp" />
 
                         <input type="password"
                             onChange={(e) => setPassword(e.target.value)}
-                            placeholder="Password" className="inp" />
+                            placeholder="Password" value={password} className="inp" />
                         <br />
                         <button className="submit-btn" onClick={handleSignup}>
                             Submit

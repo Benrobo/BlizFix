@@ -4,14 +4,14 @@ const { v4: uuid } = require("uuid")
 const Error = require("../utils/error")
 const createHash = require("../utils/createHash")
 
-
 const conn = require("../models/Model")
 
 router.post("/register", (req, res) => {
     const userid = uuid();
     const role = 1;
-    let user_img = "dumy-random-img.png"
     const { username, email, password, profession } = req.body;
+    // set random user avatars based on their name
+    let user_img = `https://avatars.dicebear.com/api/micah/${username}.svg`;
 
     if (username === "" || email === "" || password === "" || profession === "") {
         return res.json(Error(400, "All fields are required")).status(400)
