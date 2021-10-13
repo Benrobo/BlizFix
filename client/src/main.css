@@ -1,5 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap");
 
+@font-face {
+  font-family: myFirstFont;
+  src: url("./FiraCode-Medium.ttf");
+}
+
 :root {
   --bg-d: #030e1b;
   --bg-n: #020911;
@@ -23,7 +28,8 @@ body {
   padding: 0px;
   margin: 0px;
   background: var(--bg-n);
-  font-family: "Montserrat", sans-serif;
+  /* font-family: "Montserrat", sans-serif; */
+  font-family: myFirstFont;
 }
 
 .failure {

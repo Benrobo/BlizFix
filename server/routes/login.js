@@ -47,10 +47,9 @@ router.post("/login", (req, res) => {
                         let sql = "UPDATE users SET refresh_token = $1 WHERE email = $2";
 
                         let chk = await conn.query(sql, [refreshToken, email]);
-
                         if (chk.rowCount > 0) {
-                            sendTokens(res, accessToken, refreshToken);
                             setRefreshToken(res, refreshToken)
+                            sendTokens(res, accessToken, refreshToken);
                         }
 
                         return;

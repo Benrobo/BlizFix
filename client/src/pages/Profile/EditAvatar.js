@@ -1,15 +1,11 @@
 import React, { useState, useRef } from 'react'
-import "./profile.css"
 import { fileUpload } from '../../utils/fileUpload';
+import "./profile.css"
 
-export const EditProfile = ({ hideForm, userData }) => {
-    const [userdata, setUserdata] = useState("");
-    const [name, setUsername] = useState("");
-    const [email, setEmail] = useState("");
-    const [userAvatar, setAvatar] = useState("");
-    const [userProfession, setProfession] = useState("");
-    const [path, setFilePath] = useState("")
-
+export const EditAvatar = ({ hideForm }) => {
+    const [filepath, setFilePath] = useState("")
+    const [filedata, setFileData] = useState("")
+    const [image, setImage] = useState("")
     const fileRef = useRef()
 
     function handleFile(e) {
@@ -20,13 +16,20 @@ export const EditProfile = ({ hideForm, userData }) => {
 
     async function handleFileChange(e) {
         let file = e.target.files[0];
-        let api = "http://localhost:5000/api/file/upload"
-        let path = await fileUpload(file, api)
+        let imgsrc = URL.createObjectURL(file)
+        setFileData(file)
+        setImage(imgsrc)
 
+    }
+
+    async function submitFile(e) {
+        e.preventDefault()
+        let api = "http://localhost:5000/api/file/upload"
+        let path = await fileUpload(filedata, api)
         console.log(path)
     }
 
-    console.log(userData)
+    // console.log(userData)
     function toggleForm() {
         hideForm()
     }
@@ -35,7 +38,7 @@ export const EditProfile = ({ hideForm, userData }) => {
         <div className="profile-form-cont">
             <form className="form-group">
                 <div className="head">
-                    <h3>Edit Profile</h3>
+                    <h3>Set Avatar</h3>
                     <ion-icon name="close" className="close-form" onClick={toggleForm}></ion-icon>
                 </div>
                 <div className="body">
@@ -44,16 +47,11 @@ export const EditProfile = ({ hideForm, userData }) => {
                             Change Image
                         </button>
                         <input type="file" ref={fileRef} style={{ display: "none" }} onChange={handleFileChange} />
-                        <small className="filetext">{userData.user_img.slice(0, 20) + "...."}</small>
+                        <small className="filetext">{ }</small>
                     </div>
-                    <input type="text" value={userData.username} placeholder="Username" className="inp" />
-
-                    <input type="email" value={userData.email} placeholder="Email" className="inp" />
-
-                    <input type="text" value={userData.profession} placeholder="Profession" className="inp" />
-
+                    <img src={image} className="img-fluid" alt="" />
                     <br />
-                    <button className="submit-btn btn">
+                    <button className="submit-btn btn" onClick={submitFile}>
                         Save Profile
                     </button>
                 </div>

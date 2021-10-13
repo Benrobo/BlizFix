@@ -7,13 +7,13 @@ import { Upload } from './pages/Upload/Upload';
 import { Signup } from './pages/Signup/Signup';
 import { Login } from './pages/Login/Login';
 import { Profile } from './pages/Profile/Profile';
+import { Notfound } from './pages/Notfound/Notfound';
 import { Navbar } from './comp/Navbar/Navbar';
-
 import { checkAuth } from "./utils/checkAuth"
 
 // import 
 function App() {
-    console.log(checkAuth())
+
     return (
         <Router>
             <Route path="/" exact>
@@ -23,19 +23,18 @@ function App() {
                 <Post />
             </Route>
             <Route path="/upload">
-                <Navbar />
-                <Upload />
-            </Route>
-            <Route path="/profile">
-                {
-                    checkAuth() ?
-                        <>
-                            <Navbar />
-                            <Profile />
-                        </>
-                        :
-                        <Redirect to="/login" />
+                {checkAuth() ?
+                    <>
+                        <Navbar />
+                        <Upload />
+                    </>
+                    :
+                    <Redirect to="/login" />
                 }
+            </Route>
+            <Route path="/profile/:userId">
+                <Navbar />
+                <Profile />
             </Route>
             <Route path="/signup">
                 {
@@ -52,7 +51,7 @@ function App() {
             <Route path="/login">
                 {
                     checkAuth() ?
-                        <Redirect to="/profile" />
+                        <Redirect to="/" />
                         :
                         <>
                             <Navbar />
@@ -61,6 +60,13 @@ function App() {
 
                 }
             </Route>
+            <Route path="/notfound">
+                <Navbar />
+                <Notfound />
+            </Route>
+            {/* <Route>
+                <Redirect to="/notfound" />
+            </Route> */}
         </Router>
     );
 }

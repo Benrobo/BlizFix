@@ -25,12 +25,14 @@ app.use(session({ secret: 'secrete', saveUninitialized: true, resave: true }));
 // route middleware
 app.use("/auth/", require("./routes/register"))
 app.use("/auth/", require("./routes/login"))
+app.use("/auth/", require("./routes/logout"))
 app.use("/api/post/", require("./routes/addPost"))
 app.use("/api/post/", require("./routes/getPosts"))
 app.use("/api/post/", require("./routes/editPost"))
 app.use("/api/post/", require("./routes/deletePost"))
 app.use("/api/file/", require("./routes/fileUpload"))
 
+app.use("/api/user/", require("./routes/getUsers"))
 
 const port = 5000;
 app.listen(port)

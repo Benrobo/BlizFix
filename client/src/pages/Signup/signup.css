@@ -29,7 +29,7 @@
   width: 100%;
   position: relative;
 }
-.post-form-cont form .head .close-form {
+.post-form-cont form .head ion-icon {
   font-size: 25px;
   padding: 10px;
   position: absolute;
@@ -41,7 +41,26 @@
   transition: 0.2s;
 }
 
-.post-form-cont form .head .close-form:hover {
+.post-form-cont form .head ion-icon:hover {
+  background: var(--bg-l-rd);
+  opacity: 1;
+  color: var(--bg-n);
+  transform: scale(0.95);
+}
+
+.profile-form-cont form .head ion-icon {
+  font-size: 25px;
+  padding: 10px;
+  position: absolute;
+  top: 0px;
+  right: 5px;
+  border-radius: 50%;
+  transform: scale(0.85);
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.profile-form-cont form .head ion-icon:hover {
   background: var(--bg-l-rd);
   opacity: 1;
   color: var(--bg-n);

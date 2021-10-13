@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import "./signup.css"
 import redirect from "../../utils/redirect"
+import { Link } from 'react-router-dom'
 
 export const Signup = () => {
     const [error, setError] = useState("")
@@ -76,6 +77,8 @@ export const Signup = () => {
                         <button className="submit-btn" onClick={handleSignup}>
                             Submit
                         </button>
+                        <br />
+                        <small>Dont have an account? <Link to="/login">Sign In</Link> </small>
                     </div>
                 </form>
             </div>

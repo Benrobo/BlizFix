@@ -1,19 +1,15 @@
 import React, { useState } from 'react'
 import "./upload.css"
+import redirect from '../../utils/redirect'
 
 export const Upload = () => {
-
-    function handleRedirect(){
-        window.location = "/"
-    }
-
     return (
         <div>
             <div class="post-form-cont">
                 <form class="form-group">
                     <div class="head">
                         <h3>Add Post</h3>
-                        <ion-icon name="close" class="close-form" onClick={handleRedirect}></ion-icon>
+                        <ion-icon name="close" class="close-form" onClick={() => redirect("/")}></ion-icon>
                     </div>
                     <div class="body">
                         <div class="file-cont">

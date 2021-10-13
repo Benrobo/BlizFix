@@ -20,7 +20,7 @@ function uploadFile(file, filename) {
         return { msg: "Something went wrong", status: 500 };
     }
 
-    return uploadPath;
+    return { uploadPath, newfilename };
 }
 
 module.exports = { uploadFile }
