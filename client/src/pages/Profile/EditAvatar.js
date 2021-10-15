@@ -1,35 +1,51 @@
-import React, { useState, useRef } from 'react'
-import { fileUpload } from '../../utils/fileUpload';
+import React, { useState } from 'react'
 import "./profile.css"
 
 export const EditAvatar = ({ hideForm }) => {
-    const [filepath, setFilePath] = useState("")
-    const [filedata, setFileData] = useState("")
-    const [image, setImage] = useState("")
-    const fileRef = useRef()
+    const [msg, setMessage] = useState("")
+    const [username, setUsername] = useState("Your Name");
+    const [loading, setLoading] = useState(false);
 
-    function handleFile(e) {
-        e.preventDefault();
-
-        fileRef.current.click();
-    }
-
-    async function handleFileChange(e) {
-        let file = e.target.files[0];
-        let imgsrc = URL.createObjectURL(file)
-        setFileData(file)
-        setImage(imgsrc)
-
-    }
-
-    async function submitFile(e) {
+    async function submitForm(e) {
         e.preventDefault()
-        let api = "http://localhost:5000/api/file/upload"
-        let path = await fileUpload(filedata, api)
-        console.log(path)
-    }
 
-    // console.log(userData)
+        // validate name
+        if (username === "") {
+            alert("Field cant be empty")
+            return;
+        }
+
+        if (username.length > 15) {
+            alert("Username length must be within 15")
+            return
+        }
+        // if(inputRef.current.value.length)
+        setLoading(true);
+        let api = "http://localhost:5000/api/file/upload"
+        let tokens = JSON.parse(localStorage.getItem("tokens"));
+        const refreshToken = tokens.refreshToken;
+        let res = await fetch(api, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "authorization": `Bearer ${refreshToken}`,
+            },
+            body: JSON.stringify({ image: `https://avatars.dicebear.com/api/micah/${username}.svg` })
+        })
+        let result = await res.json();
+        if (result.status === 200) {
+            setLoading(false);
+            setMessage("Profile pics uploaded successfully")
+            setInterval(() => {
+                window.location.reload(true)
+            }, 1000);
+            return;
+        }
+        else {
+            setMessage("Something went wrong when uploading image")
+            setLoading(false);
+        }
+    }
     function toggleForm() {
         hideForm()
     }
@@ -42,17 +58,16 @@ export const EditAvatar = ({ hideForm }) => {
                     <ion-icon name="close" className="close-form" onClick={toggleForm}></ion-icon>
                 </div>
                 <div className="body">
-                    <div className="file-cont">
-                        <button className="fileUpload" onClick={handleFile}>
-                            Change Image
-                        </button>
-                        <input type="file" ref={fileRef} style={{ display: "none" }} onChange={handleFileChange} />
-                        <small className="filetext">{ }</small>
-                    </div>
-                    <img src={image} className="img-fluid" alt="" />
+                    <small className="text-info">{msg}</small>
                     <br />
-                    <button className="submit-btn btn" onClick={submitFile}>
-                        Save Profile
+                    <small>https://avatars.dicebear.com/api/micah/{<kbd>Your Name</kbd>}</small>
+                    <div className="file-cont">
+                        <br />
+                        <input type="url" placeholder="" className="inp" onChange={(e) => setUsername(e.target.value)} value={username} />
+                    </div>
+                    <br />
+                    <button disabled={loading} className="submit-btn btn" onClick={submitForm}>
+                        {loading ? "Loading..." : "Upload"}
                     </button>
                 </div>
             </form>

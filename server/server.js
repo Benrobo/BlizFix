@@ -33,6 +33,7 @@ app.use("/api/post/", require("./routes/deletePost"))
 app.use("/api/file/", require("./routes/fileUpload"))
 
 app.use("/api/user/", require("./routes/getUsers"))
+app.use("/api/user/", require("./routes/editUser"))
 
 const port = 5000;
 app.listen(port)

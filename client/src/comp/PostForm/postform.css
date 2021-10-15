@@ -1,105 +1,105 @@
 /* POST FORM CONTAINER */
-.post-form-cont{
-    width:100%;
-    height:100vh;
-    padding:0px;
-    background:rgba(0, 0, 0, .9);
-    position:fixed;
-    left:0px;
-    top:0px;
-    display:flex;
-    align-items: center;
-    justify-content:center;
-    flex-direction: column;
-    /* display:none; */
+.post-form-cont {
+  width: 100%;
+  height: 100vh;
+  padding: 0px;
+  background: rgba(0, 0, 0, 0.9);
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  z-index: 1000;
 }
 
-.post-form-cont form{
-    display:flex;
-    align-items: center;
-    justify-content:center;
-    flex-direction: column;
-    padding:20px;
-    width:450px;
-    height:auto;
-    background: #020911;
-    color:#ccc;
-    border-radius:20px;
+.post-form-cont form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 20px;
+  width: 450px;
+  height: auto;
+  background: #020911;
+  color: #ccc;
+  border-radius: 20px;
 }
-.post-form-cont form .head{
-    width:100%;
-    position:relative;
+.post-form-cont form .head {
+  width: 100%;
+  position: relative;
 }
-.post-form-cont form .head .close-form{
-    font-size:25px;
-    padding:10px;
-    position:absolute;
-    top:0px;
-    right:5px;
-    border-radius:50%;
-    transform: scale(.85);
-    cursor:pointer;
-    transition:.2s;
-}
-
-.post-form-cont form .head .close-form:hover{
-    background: var(--bg-l-rd);
-    opacity: 1;
-    color:var(--bg-n);
-    transform: scale(.95);
+.post-form-cont form .head .close-form {
+  font-size: 25px;
+  padding: 10px;
+  position: absolute;
+  top: 0px;
+  right: 5px;
+  border-radius: 50%;
+  transform: scale(0.85);
+  cursor: pointer;
+  transition: 0.2s;
 }
 
-.post-form-cont form .body{
-    width:100%;
-    display:flex;
-    align-items: center;
-    justify-content:center;
-    flex-direction: column;
+.post-form-cont form .head .close-form:hover {
+  background: var(--bg-l-rd);
+  opacity: 1;
+  color: var(--bg-n);
+  transform: scale(0.95);
 }
-.post-form-cont form .body .file-cont{
-    padding:12px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    width:100%;
+
+.post-form-cont form .body {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
-.post-form-cont form .body .file-cont .fileUpload{
-    background:var(--bg-d);
-    padding:8px 12px;
-    border-radius: 30px;
-    border: none;
-    outline:none;
-    color:var(--bg-l);
-    cursor:pointer;
+.post-form-cont form .body .file-cont {
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
 }
-.post-form-cont form .body .inp{
-    width: 100%;
-    padding:12px;
-    margin:12px;
-    background:var(--bg-n);
-    border: none;
-    border-bottom: 1px solid var(--bg-l);
-    outline:none;
-    color:#ccc;
+.post-form-cont form .body .file-cont .fileUpload {
+  background: var(--bg-d);
+  padding: 8px 12px;
+  border-radius: 30px;
+  border: none;
+  outline: none;
+  color: var(--bg-l);
+  cursor: pointer;
 }
-.post-form-cont form .body .inp:focus{
-    background: var(--bg-tp);
+.post-form-cont form .body .inp {
+  width: 100%;
+  padding: 12px;
+  margin: 12px;
+  background: var(--bg-n);
+  border: none;
+  border-bottom: 1px solid var(--bg-l);
+  outline: none;
+  color: #ccc;
 }
-.post-form-cont form .body .submit-btn{
-    width:80%;
-    padding:10px 12px;
-    border-radius:30px;
-    border: none;
-    outline:none;
-    background:var(--bg-d);
-    color:var(--bg-l);
-    cursor:pointer;
+.post-form-cont form .body .inp:focus {
+  background: var(--bg-tp);
 }
-.post-form-cont form .body .solution{
-    text-indent: none;
-    font-weight: 300;
-    font-size:12px;
-    resize: none;
-    height:200px;
-    max-height: 250px;
+.post-form-cont form .body .submit-btn {
+  width: 80%;
+  padding: 10px 12px;
+  border-radius: 30px;
+  border: none;
+  outline: none;
+  background: var(--bg-d);
+  color: var(--bg-l);
+  cursor: pointer;
+}
+.post-form-cont form .body .solution {
+  text-indent: none;
+  font-weight: 300;
+  font-size: 12px;
+  resize: none;
+  height: 200px;
+  max-height: 250px;
 }
