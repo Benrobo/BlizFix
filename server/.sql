@@ -20,13 +20,14 @@ CREATE TABLE users(
 CREATE TABLE posts(
     id TEXT PRIMARY KEY,
     title TEXT NOT NULL,
-    img TEXT NOT NULL,
+    image_url TEXT NOT NULL,
+    image_id TEXT NOT NULL,
     user_id TEXT NOT NULL,
     likes INT NOT NULL,
     dislikes INT NOT NULL,
-    body TEXT NOT NULL,
+    slug TEXT NOT NULL,
     views INT NOT NULL,
-    solution TEXT NOT NULL,
+    description TEXT NOT NULL,
     user_role INT NOT NULL,
     created_at TIMESTAMP NOT NULL DEFAULT NOW()
 );
