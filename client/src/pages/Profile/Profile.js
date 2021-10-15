@@ -13,10 +13,7 @@ export const Profile = () => {
     const { userId } = useParams();
     const [userdata, setUserdata] = useState([]);
     const [loading, setLoading] = useState(false);
-    const [name, setUsername] = useState("");
-    const [email, setEmail] = useState("");
-    const [userAvatar, setAvatar] = useState("");
-    const [userProfession, setProfession] = useState("");
+    const [error, setError] = useState("")
     const [toggleForm, setToggleForm] = useState(false)
     const [toggleAvatarForm, setAvatarForm] = useState(false)
 
@@ -46,6 +43,8 @@ export const Profile = () => {
                 }
             })
             .catch((e) => {
+                setError("Something went wrong when fetching user")
+                setLoading(false)
                 console.log(e)
                 return;
             })
@@ -67,6 +66,7 @@ export const Profile = () => {
     return (
         <section className="section">
             <div className="main">
+                <p className="text-white" style={{ color: "#ccc", textAlign: "center" }}>{error}</p>
                 {loading ? <Loading /> : (userdata.map((data, i) => {
                     let { username, email, user_img, profession } = data;
                     console.log({ username, email, user_img, profession })
