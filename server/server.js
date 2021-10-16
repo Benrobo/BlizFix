@@ -24,6 +24,7 @@ app.use("/auth/", require("./routes/logout"))
 // POST 
 app.use("/api/post/", require("./routes/addPost"))
 app.use("/api/post/", require("./routes/getPosts"))
+app.use("/api/post/", require("./routes/getPostById"))
 app.use("/api/post/", require("./routes/editPost"))
 app.use("/api/post/", require("./routes/deletePost"))
 app.use("/api/file/", require("./routes/fileUpload"))

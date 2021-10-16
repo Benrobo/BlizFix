@@ -54,14 +54,16 @@ export const Cards = () => {
                         <hr />
                         <div className="ideas-footer">
                             <div className="left">
-                                <img src={post.user_img} alt="" className="img-fluid user-img" />
+                                <Link to={`/profile/${post.user_id}`} target="_blank">
+                                    <img src={post.user_img} alt="" className="img-fluid user-img" />
+                                </Link>
                             </div>
                             <div className="right">
                                 <div className="likes action">
                                     <ion-icon name="heart" className="upvote icon"></ion-icon>
                                     <span className="count">{post.likes}</span>
                                 </div>
-                                <div className="views action">
+                                <div className="views action p-1">
                                     <ion-icon name="eye" className="view icon"></ion-icon>
                                     <span className="count">{post.views}</span>
                                 </div>

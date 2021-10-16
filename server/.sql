@@ -32,5 +32,15 @@ CREATE TABLE posts(
     created_at TIMESTAMP NOT NULL DEFAULT NOW()
 );
 
+
+CREATE TABLE reaction(
+    id TEXT PRIMARY KEY,
+    post_id TEXT NOT NULL,
+    user_id TEXT NOT NULL,
+    like_count INT NOT NULL,
+    user_role INT NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT NOW()
+);
+
 -- JOIN USER AND POSTS TABLE
 SELECT posts.id,users.id,user_img,posts.id,posts.created_at,title,slug,description,image_url,image_id,likes,views FROM posts INNER JOIN users ON users.id=posts.user_id ORDER BY posts.created_at

@@ -10,6 +10,7 @@ import { Profile } from './pages/Profile/Profile';
 import { Notfound } from './pages/Notfound/Notfound';
 import { Navbar } from './comp/Navbar/Navbar';
 import { checkAuth } from "./utils/checkAuth"
+import { Postform } from './comp/PostForm/Postform';
 
 // import 
 function App() {
@@ -19,7 +20,7 @@ function App() {
             <Route path="/" exact>
                 <Home />
             </Route>
-            <Route path="/post">
+            <Route path="/post/:postid">
                 <Post />
             </Route>
             <Route path="/upload">
@@ -27,6 +28,16 @@ function App() {
                     <>
                         <Navbar />
                         <Upload />
+                    </>
+                    :
+                    <Redirect to="/login" />
+                }
+            </Route>
+            <Route path="/editPost/:postId">
+                {checkAuth() ?
+                    <>
+                        <Navbar />
+                        <Postform />
                     </>
                     :
                     <Redirect to="/login" />
