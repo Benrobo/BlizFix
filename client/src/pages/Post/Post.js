@@ -47,10 +47,12 @@ export const Post = () => {
             .catch((e) => {
                 setError("Something went wrong when fetching user")
                 setLoading(false)
+                console.log(e);
                 return;
             })
     }, [postid])
 
+    console.log(postData)
 
     function userAction() {
         let choice = window.confirm("Are you sure you wanna delete this");

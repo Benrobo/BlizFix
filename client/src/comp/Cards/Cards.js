@@ -5,6 +5,7 @@ import "../../main.css"
 import userImg from '../../assets/img/logo/logo1.png'
 import postImage from "../../assets/img/posts/posts.PNG"
 import { Link } from 'react-router-dom'
+import TextTruncate from 'react-text-truncate';
 
 export const Cards = () => {
     const [loading, setLoading] = useState(false)
@@ -23,12 +24,16 @@ export const Cards = () => {
                 setLoading(true);
 
             }
-            console.log(postData);
+            else if (res && res.posts === null) {
+                setError(`No Project Ideas Available, Try adding some ideas here ${<Link to="/upload">Upload</Link>}`)
+            }
         }
         catch (e) {
+            // console.log(e)
             setLoading(true)
             setError("Something went wrong when fetching posts")
-            console.log("Something went wrong when fetching posts")
+            // console.log("Something went wrong when fetching posts")
+            return;
         }
     }
 
@@ -42,13 +47,26 @@ export const Cards = () => {
             {postData.map((post, i) => {
                 return (
                     <div className="ideas-box" key={i}>
-                        <Link to={`post/${post.id}`}>
+                        <Link to={`/post/${post.id}`}>
                             <div className="idea-head">
-                                <img src={post.image_url} data-img-id={post.image_id} alt="" className="img-fluid" />
+                                <div className="idea-img" style={{
+                                    background: `url(${post.image_url})`,
+                                    backgroundPosition: "center",
+                                    backgroundRepeat: "no-repeat",
+                                    backgroundSize: "cover",
+                                }} data-img-id={post.image_id}></div>
+                                {/* <img src={post.image_url} data-img-id={post.image_id} alt="" className="img-fluid" /> */}
                             </div>
                             <div className="idea-middle mt-2">
                                 <small className="time">{moment(post.created_at).startOf('hour').fromNow()}</small>
-                                <h5 className="title">{post.title}</h5>
+                                <TextTruncate
+                                    line={1.0}
+                                    element="p"
+                                    truncateText="...."
+                                    text={post.title}
+                                    textTruncateChild={<Link to={`/post/${post.id}`}>see more</Link>}
+                                />
+                                {/* <p className="title">{post.title}</p> */}
                             </div>
                         </Link>
                         <hr />

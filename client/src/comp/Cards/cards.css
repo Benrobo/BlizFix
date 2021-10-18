@@ -26,11 +26,13 @@
 .section .ideas-cont .ideas-box .idea-head {
   height: auto;
 }
-.section .ideas-cont .ideas-box .idea-head img {
+.section .ideas-cont .ideas-box .idea-head .idea-img {
   width: 100%;
+  height: 200px;
   border-radius: 15px;
 }
-.section .ideas-cont .ideas-box .idea-middle h5 {
+.section .ideas-cont .ideas-box .idea-middle p,
+.section .ideas-cont .ideas-box .idea-middle a {
   font-weight: 300;
   color: #777;
 }

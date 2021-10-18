@@ -8,29 +8,27 @@ const conn = require("../models/Model")
 const { verifyToken } = require("../auth/auth");
 
 router.post("/editPost", verifyToken, (req, res) => {
-    let { id } = req.user;
-    let { postId, title, image, body, solution } = req.body;
-    // get post with that id
-    let sql = "SELECT * FROM posts WHERE id = $1";
-    conn.query(sql, [postId], (err, results) => {
-        if (err) {
-            return res.json(Error(500, "Something went wrong when editing post")).status(500);
-        }
-        else if (results.rowCount === 0) {
-            return res.status(404).json(Error(400, "No post found"));
-        }
-        else if (results.rowCount > 0) {
-            let editSql = `UPDATE posts SET title=$1, user_id=$2, body=$3, img=$4, solution=$5`;
-            conn.query(editSql, [title, id, body, image, solution], (err, data) => {
-                if (err) {
-                    console.log(err)
-                    return res.status(500).json(Error(400, "Something went wrong when adding posts"))
-                }
+    let { id, role } = req.user;
+    let { postId, title, slug, description, image } = req.body;
+    if (image === "") {
+        return res.status(403).json({ msg: "Image is missing", status: 404 })
+    }
+    try {
+        let sql = "UPDATE posts SET title=$1,image_url=$2,slug=$3,description=$4 WHERE posts.id=$5 AND posts.user_id=$6"
+        conn.query(sql, [title, image, slug, description, postId, id], (err, result) => {
+            if (err) {
+                console.log(err)
+                return res.status(500).json(Error(400, "Something went wrong when adding posts"))
+            }
 
-                return res.json("Post updated sucessfully").status(200)
-            })
-        }
-    })
+            console.log(result)
+
+            return res.json({ msg: "Post updated sucessfully", status: 200 }).status(200)
+        })
+    } catch (e) {
+        console.log(e)
+        return res.status(500).json({ msg: "Something went wrong uploading image", status: 500 })
+    }
 })
 
 

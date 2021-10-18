@@ -66,7 +66,10 @@ hr {
 .section .main .post-container .post .post-details .top .left img {
   width: 40px;
   border-radius: 50%;
-  border: 2px solid var(--bg-l);
+  border-top: 3px solid var(--bg-l);
+  border-bottom: 3px solid var(--bg-l);
+  border-right: 2px solid transparent;
+  border-left: 2px solid transparent;
   padding: 3px;
   margin: 10px;
 }

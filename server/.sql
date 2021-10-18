@@ -20,7 +20,7 @@ CREATE TABLE users(
 CREATE TABLE posts(
     id TEXT PRIMARY KEY,
     title TEXT NOT NULL,
-    image_url TEXT NOT NULL,
+    image_url bytea NOT NULL,
     image_id TEXT NOT NULL,
     user_id TEXT NOT NULL,
     likes INT NOT NULL,

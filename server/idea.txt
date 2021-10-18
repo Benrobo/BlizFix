@@ -4,4 +4,4 @@ This is a project that enables user in putting down whatever ideas that comes to
 
 Other users can then vote on most interesting ideas.
 
-
+The post with highest votes get ranked as first in order

@@ -12,7 +12,7 @@ const app = express()
 app.use(fileUpload());
 app.use(cookieParser());
 app.use(cors())
-app.use(bodyParser.json());
+app.use(bodyParser.json({ limit: "100mb" }));
 app.use(bodyParser.urlencoded({ urlencoded: true, extended: false }));
 app.use(session({ secret: 'secrete', saveUninitialized: true, resave: true }));
 

@@ -5,7 +5,7 @@ import redirect from '../../utils/redirect'
 export const Upload = () => {
 
     const fileRef = useRef();
-    const [file, setFile] = useState("");
+    // const [file, setFile] = useState("");
     const [msg, setMessage] = useState("")
     const [filename, setFileName] = useState("");
     const [image, setImage] = useState("")
@@ -23,7 +23,7 @@ export const Upload = () => {
 
     async function handleFileChange(e) {
         let file = e.target.files[0];
-        setFile(file);
+        // setFile(file);
         setFileName(file.name)
 
         let reader = await new FileReader();
@@ -52,34 +52,39 @@ export const Upload = () => {
         else {
             setLoading(true)
             // post data to backend
-            let apiRoute = "http://localhost:5000/api/post/add";
-            let postData = {
-                title,
-                slug,
-                description,
-                image
+            try {
+                let apiRoute = "http://localhost:5000/api/post/add";
+                let postData = {
+                    title,
+                    slug,
+                    description,
+                    image
+                }
+                let req = await fetch(apiRoute, {
+                    method: "post",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "authorization": `Bearer ${refreshToken}`
+                    },
+                    body: JSON.stringify(postData)
+                })
+
+                let res = await req.json();
+                if (res && res.status === 200) {
+                    console.log(res);
+                    setMessage(res.msg)
+                    setLoading(false);
+                    setTimeout(() => {
+                        redirect("/")
+                    }, 1000);
+                } else {
+                    setMessage(res.msg)
+                    setLoading(false);
+                }
             }
-            let req = await fetch(apiRoute, {
-                method: "post",
-                headers: {
-                    "Content-Type": "application/json",
-                    "authorization": `Bearer ${refreshToken}`
-                },
-                body: JSON.stringify(postData)
-            })
-
-            let res = await req.json();
-
-            if (res && res.status === 200) {
-                console.log(res);
-                setMessage(res.msg)
+            catch (e) {
                 setLoading(false);
-                setTimeout(() => {
-                    redirect("/")
-                }, 1000);
-            } else {
-                setMessage(res.msg)
-                setLoading(false);
+                setMessage("Something went wrong, could not add post")
             }
         }
     }
