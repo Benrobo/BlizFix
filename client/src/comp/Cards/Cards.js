@@ -43,7 +43,7 @@ export const Cards = () => {
 
     return (
         <>
-            <p>{error}</p>
+            <p style={{ textAlign: "center", color: "#ccc" }}>{error}</p>
             {postData.map((post, i) => {
                 return (
                     <div className="ideas-box" key={i}>

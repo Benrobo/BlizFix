@@ -131,6 +131,7 @@ export const Postform = () => {
 
     return (
         <div>
+            <p style={{ textAlign: "center", color: "#ccc" }}>{msg}</p>
             {loading ? "Loading .... " : ""}
             {postData.map((post, i) => {
                 return (
