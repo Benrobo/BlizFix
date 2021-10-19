@@ -172,7 +172,7 @@ export const Postform = () => {
 
                                 </textarea>
                                 <br />
-                                <button className="submit-btn" onClick={handleFormSubmition}>
+                                <button className="submit-btn" disabled={loading} onClick={handleFormSubmition}>
                                     {loading ? "Loading..." : "Submit"}
                                 </button>
                             </div>

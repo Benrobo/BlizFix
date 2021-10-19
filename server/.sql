@@ -34,12 +34,11 @@ CREATE TABLE posts(
 
 
 CREATE TABLE reaction(
-    id TEXT PRIMARY KEY,
     post_id TEXT NOT NULL,
     user_id TEXT NOT NULL,
-    like_count INT NOT NULL,
     user_role INT NOT NULL,
-    created_at TIMESTAMP NOT NULL DEFAULT NOW()
+    action TEXT NOT NULL,
+    UNIQUE(user_id, post_id)
 );
 
 -- JOIN USER AND POSTS TABLE

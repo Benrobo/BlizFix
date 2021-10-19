@@ -14,14 +14,14 @@ router.post("/editPost", verifyToken, (req, res) => {
         return res.status(403).json({ msg: "Image is missing", status: 404 })
     }
     try {
-        let sql = "UPDATE posts SET title=$1,image_url=$2,slug=$3,description=$4 WHERE posts.id=$5 AND posts.user_id=$6"
-        conn.query(sql, [title, image, slug, description, postId, id], (err, result) => {
+        // console.log(req.user, postId, title, slug, image.slice(0, 20))
+        // return;
+        let sql = "UPDATE posts SET title=$1,image_url=$2,slug=$3,description=$4 WHERE id=$5"
+        conn.query(sql, [title, image, slug, description, postId], (err, result) => {
             if (err) {
                 console.log(err)
                 return res.status(500).json(Error(400, "Something went wrong when adding posts"))
             }
-
-            console.log(result)
 
             return res.json({ msg: "Post updated sucessfully", status: 200 }).status(200)
         })

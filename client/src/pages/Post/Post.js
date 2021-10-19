@@ -66,7 +66,7 @@ export const Post = () => {
             <section className="section">
                 <div className="main">
                     <div className="post-container">
-                        <p>{error}</p>
+                        <p style={{ textAlign: "center", color: "#ccc" }}>{error}</p>
                         {postData.map((post, i) => {
                             return (
                                 <div className="post" key={i}>

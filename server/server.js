@@ -27,6 +27,7 @@ app.use("/api/post/", require("./routes/getPosts"))
 app.use("/api/post/", require("./routes/getPostById"))
 app.use("/api/post/", require("./routes/editPost"))
 app.use("/api/post/", require("./routes/deletePost"))
+app.use("/api/post/", require("./routes/likes"))
 app.use("/api/file/", require("./routes/fileUpload"))
 // USER
 app.use("/api/user/", require("./routes/getUsers"))
