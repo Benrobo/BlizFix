@@ -112,7 +112,7 @@ export const Upload = () => {
 
                         <textarea name="" id="" cols="30" rows="5" className="solution inp" placeholder="Describe your solution..." onChange={(e) => setDescription(e.target.value)}></textarea>
                         <br />
-                        <button className={loading ? "disabled submit-btn" : "submit-btn"} onClick={handleSubmit}>
+                        <button className="submit-btn" disabled={loading} onClick={handleSubmit}>
                             {loading ? "Loading..." : "Submit"}
                         </button>
                     </div>

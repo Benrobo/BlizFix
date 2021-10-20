@@ -21,16 +21,17 @@ export const Cards = () => {
 
             if (res && res.status === 200) {
                 setPostData(res.posts);
-                setLoading(true);
-
+                setLoading(false);
+                console.log(res)
             }
-            else if (res && res.posts === null) {
-                setError(`No Project Ideas Available, Try adding some ideas here ${<Link to="/upload">Upload</Link>}`)
+            if (res && res.posts.length === 0) {
+                setLoading(false);
+                setError(`No Project Ideas Available, Try adding some ideas`)
             }
         }
         catch (e) {
-            // console.log(e)
-            setLoading(true)
+            console.log(e)
+            setLoading(false)
             setError("Something went wrong when fetching posts")
             // console.log("Something went wrong when fetching posts")
             return;
@@ -43,7 +44,7 @@ export const Cards = () => {
 
     return (
         <>
-            <p style={{ textAlign: "center", color: "#ccc" }}>{error}</p>
+            <div style={{ textAlign: "center", color: "#ccc" }}>{error}</div>
             {postData.map((post, i) => {
                 return (
                     <div className="ideas-box" key={i}>

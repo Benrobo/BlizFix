@@ -5,22 +5,23 @@ import { Navbar } from '../../comp/Navbar/Navbar'
 import { Postform } from "../../comp/PostForm/Postform"
 import postImg from "../../assets/img/posts/posts.PNG"
 import { checkAuth } from "../../utils/checkAuth"
+import { checkPostIdAuth } from "../../utils/checkPostIdAuth"
 import redirect from "../../utils/redirect"
 import moment from "moment"
 import "./post.css"
+import { FloatingBtn } from '../../comp/FloatingBtn/FloatingBtn'
 
 
 export const Post = () => {
 
     let { postid } = useParams();
-    const [toggle, setToggle] = useState(false);
-    const [deleteOption, setDeleteOption] = useState(false);
     const [loading, setLoading] = useState(false)
     const [postData, setPostData] = useState([])
     const [error, setError] = useState("")
 
     useEffect(() => {
         // getUser(userId)
+        setLoading(true)
         let api = "http://localhost:5000/api/post/getPostById"
         fetch(api, {
             method: "post",
@@ -33,7 +34,6 @@ export const Post = () => {
                 return res.json()
             })
             .then((data) => {
-                setLoading(true)
                 if (data.status === 200) {
                     setPostData(data.posts);
                     setLoading(false)
@@ -47,17 +47,57 @@ export const Post = () => {
             .catch((e) => {
                 setError("Something went wrong when fetching user")
                 setLoading(false)
-                console.log(e);
                 return;
             })
-    }, [postid])
+    }, [])
 
     console.log(postData)
 
     function userAction() {
         let choice = window.confirm("Are you sure you wanna delete this");
+        deletePost(choice)
+    }
 
-        setDeleteOption(choice)
+    function deletePost(userChoice) {
+        let tokens = JSON.parse(localStorage.getItem("tokens"));
+
+        const refreshToken = tokens.refreshToken;
+
+        if (!tokens || refreshToken === "") {
+            alert("Not auhorized, token is missing")
+            window.location.reload(true);
+            return;
+        }
+
+        if (userChoice === true) {
+            // make request
+            let api = "http://localhost:5000/api/post/deletePost"
+            fetch(api, {
+                method: "delete",
+                headers: {
+                    "Content-Type": "application/json",
+                    "authorization": `Bearer ${refreshToken}`
+                },
+                body: JSON.stringify({ postId: postid })
+            })
+                .then((res) => {
+                    return res.json()
+                })
+                .then((data) => {
+                    console.log(data)
+                    if (data.status === 200) {
+                        alert(data.msg);
+                        setTimeout(() => {
+                            redirect("/")
+                        }, 1000);
+                    }
+                    else {
+                        redirect("/notfound")
+                        return;
+                    }
+
+                })
+        }
     }
 
     return (
@@ -116,10 +156,26 @@ export const Post = () => {
                         })}
                     </div>
 
-                    {checkAuth() && <div className="post-action">
-                        <Link to={`/editPost/${postid}`} target="_blank"><ion-icon name="create" className="edit icon"></ion-icon></Link>
-                        <ion-icon name="trash" className="delete icon" onClick={userAction}></ion-icon>
-                    </div>}
+                    {loading === false ?
+                        <>
+                            {checkAuth() ?
+                                <>
+                                    {checkPostIdAuth(postid) ?
+                                        <>
+                                            {console.log(checkPostIdAuth(postid))}
+                                            <FloatingBtn userAction={userAction} postid={postid} />
+                                        </>
+                                        :
+                                        console.log(checkPostIdAuth(postid))
+                                    }
+                                </>
+                                :
+                                ""
+                            }
+                        </>
+                        :
+                        ""
+                    }
                 </div>
             </section>
         </div>

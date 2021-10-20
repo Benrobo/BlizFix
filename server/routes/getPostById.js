@@ -52,4 +52,21 @@ router.post("/getPostById", (req, res) => {
     })
 })
 
+router.post("/getPostById2", (req, res) => {
+    let { userId, postId } = req.body;
+    console.log(req.body)
+    // return;
+    let sql = "SELECT posts.id,posts.user_id,users.username,users.user_img,posts.created_at,posts.title,posts.slug,posts.description,posts.image_url FROM posts INNER JOIN users ON posts.user_id=users.id WHERE posts.id=$1 AND users.id=$2"
+    conn.query(sql, [postId, userId], (err, result) => {
+        if (err) {
+            console.log(err)
+            return res.status(500).json(Error(500, "Something went wrong when getting posts"))
+        }
+        else if (result.rowCount === 0) {
+            return res.status(404).json(Error(404, "No Post Found with that user"))
+        }
+        return res.json({ posts: result.rows, status: 200 }).status(200)
+    })
+})
+
 module.exports = router

@@ -45,34 +45,34 @@ const conn = require("../models/Model")
 */
 
 router.get("/getPosts", (req, res) => {
-    // let sql = "SELECT posts.id,posts.user_id,user_img,posts.created_at,title,slug,description,image_url,image_id,likes,views FROM posts INNER JOIN users ON users.id=posts.user_id ORDER BY posts.created_at";
-
-    let sql = `
-        SELECT 
-        posts.id,
-        posts.user_id,
-        user_img,
-        reaction.action,
-        reaction.post_id,
-        posts.created_at,
-        title,
-        slug,
-        description,
-        image_url,
-        image_id,
-        likes,
-        views
-    FROM 
-        posts
-    INNER JOIN 
-        users
-    ON 
-        users.id=posts.user_id
-    INNER JOIN
-        reaction
-    ON
-        reaction.user_id=users.id WHERE reaction.post_id=posts.id
-    `;
+    // let sql = `
+    //     SELECT 
+    //     posts.id,
+    //     posts.user_id,
+    //     user_img,
+    //     posts.created_at,
+    //     title,
+    //     slug,
+    //     description,
+    //     image_url,
+    //     image_id,
+    //     likes,
+    //     views,
+    //     reaction.action,
+    //     reaction.count,
+    //     reaction.post_id
+    // FROM 
+    //     posts
+    // INNER JOIN 
+    //     users
+    // ON 
+    //     users.id=posts.user_id
+    // INNER JOIN
+    //     reaction
+    // ON
+    //     reaction.post_id=posts.id
+    // `;
+    let sql = `SELECT posts.id,posts.user_id,users.username,users.user_img,posts.created_at,posts.title,posts.slug,posts.description,posts.image_url FROM posts INNER JOIN users ON posts.user_id=users.id`;
     conn.query(sql, (err, result) => {
         if (err) {
             console.log(err)

@@ -18,8 +18,6 @@ router.post("/add", verifyToken, async (req, res) => {
     let dislikes = 0;
     let views = 0;
     let { title, slug, description, image } = req.body;
-    console.log(req.user);
-    return;
     try {
         let sql = "INSERT INTO posts(id,title,image_url,image_id,user_id,likes,dislikes,slug,views,description,user_role) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)";
         conn.query(sql, [postId, title, image, imageId, id, likes, dislikes, slug, views, description, role], (err, result) => {

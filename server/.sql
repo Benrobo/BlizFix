@@ -38,6 +38,7 @@ CREATE TABLE reaction(
     user_id TEXT NOT NULL,
     user_role INT NOT NULL,
     action TEXT NOT NULL,
+    count INT NOT NULL,
     UNIQUE(user_id, post_id)
 );
 
